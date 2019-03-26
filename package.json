@@ -1,0 +1,35 @@
+{
+  "name": "node-chat",
+  "version": "1.0.0",
+  "description": "Node Chat Application with socket.io",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Innovator007/node-chat.git"
+  },
+  "author": "Iliyas Attarwala",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Innovator007/node-chat/issues"
+  },
+  "homepage": "https://github.com/Innovator007/node-chat#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^2.0.3",
+    "cookie-parser": "^1.4.4",
+    "dependable": "^1.1.0",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "express-promise-router": "^3.0.3",
+    "express-session": "^1.15.6",
+    "express-validator": "^5.3.1",
+    "lodash": "^4.17.11",
+    "mongoose": "^5.4.19",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0"
+  }
+}
