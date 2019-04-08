@@ -4,7 +4,10 @@ const path = require('path');
 const container = dependable.container();
 
 const dependencies = [
-    ['_','lodash']
+    ['_','lodash'],
+    ['passport','passport'],
+    ['formidable', 'formidable'],
+    ['async','async']
 ];
 
 dependencies.forEach((val) => {

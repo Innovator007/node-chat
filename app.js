@@ -10,11 +10,13 @@ const MongoStore = require('connect-mongo')(session);
 const mongoose = require('mongoose');
 const flash = require('connect-flash');
 const passport = require('passport');
-
+const socketIO = require('socket.io');
+const { Users } = require('./helpers/userClass');
+const { Global } = require('./helpers/Global');
 
 const container = require('./container');
 
-container.resolve(function(users) {
+container.resolve(function(users, admin, home, group, privatechat, _) {
 
     mongoose.Promise = global.Promise;
     mongoose.connect('mongodb://iliyas:hesoyam007@ds123196.mlab.com:23196/nodechat', { useNewUrlParser: true });
@@ -24,18 +26,33 @@ container.resolve(function(users) {
     function setupExpress() {
         const app = express();
         const server = http.createServer(app);
+        const io = socketIO(server);
         server.listen(3000, function() {
             console.log("Node Chat Application running on port 3000");
         }); 
         configureExpress(app); 
+
+        require("./socket/groupchat")(io, Users);
+        require("./socket/friend")(io);
+        require('./socket/globalroom')(io, Global, _);
+        require("./socket/privatemessage")(io);
+
         const router = require('express-promise-router')();
         users.setRouting(router);
+        admin.setRouting(router);
+        home.setRouting(router);
+        group.setRouting(router);
+        privatechat.setRouting(router);
 
         app.use(router);
     }
 
     function configureExpress(app) {
-        app.use(express.static('public'));
+        require('./passport/passport-local');
+        require('./passport/passport-facebook');
+        require('./passport/passport-google');
+
+        app.use(express.static(__dirname + "/public"));
         app.use(cookieParser());
 
         app.engine("html", ejs.renderFile);
@@ -46,12 +63,16 @@ container.resolve(function(users) {
         app.use(validator());
         app.use(session({
             secret: "NodeCHAT",
-            resave: true,
-            saveUninitialized: true,
+            resave: false,
+            saveUninitialized: false,
             store: new MongoStore({mongooseConnection: mongoose.connection})
         }));
         app.use(flash());
         app.use(passport.initialize());
         app.use(passport.session());
+        app.use(function(req,res,next){
+            res.locals.currentUser = req.user;
+            next();
+        });
     }
 });

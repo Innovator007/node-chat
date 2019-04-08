@@ -1,0 +1,31 @@
+<% include ../partials/header.ejs %>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 d-flex justify-content-center">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title text-center">
+                            ADD CHAT GROUP
+                        </h2>
+                        <form action="/dashboard" method="post">
+                            <div class="form-group">
+                                <input type="text" name="title" class="form-control" placeholder="Group Title">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="country" class="form-control" placeholder="Group Country">
+                            </div>
+                            <div class="form-group">
+                                <input type="file" id="upload" name="upload" style="display: none;">
+                                <button class="btn btn-outline-info upload-btn" type="button">Upload Image</button>
+                            </div>
+                            <button class="btn btn-outline-success">ADD GROUP</button> 
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="javascript/upload.js"></script>
+<% include ../partials/footer.ejs %>

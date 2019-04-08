@@ -2,8 +2,49 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
 }
 
 body {
-    font-family:"Open Sans", sans-serif;
+    font-family:"Montserrat", sans-serif;
+}
+
+a {
+    color: rgb(39, 38, 38) !important;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+a:hover {
+    text-decoration: none !important;
+}
+
+.error {
+    border: 1px solid red;
+}
+
+.messages {
+    height: 59vh;
+    overflow-y: scroll;
+}
+
+.online-cards-body {
+    max-height: 30vh;
+    overflow-y: scroll;
+}
+
+.img-circle {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+}
+
+#message-dropdown {
+    width: 300px !important;
+}
+
+@media (max-width: 768px) {
+    .desktop {
+        display: none !important;
+    }
 }

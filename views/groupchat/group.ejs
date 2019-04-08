@@ -1,0 +1,101 @@
+<% include ../partials/header.ejs %>
+
+    <div class="container-fluid">
+
+            <div class="modal fade" id="usersModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="name"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" name="receiverName" id="receiverName" value="">
+                        <button id="add-friend" type="button" class="btn btn-outline-info">Add Friend</button>
+                        <a id="profileLink"><button type="button" class="btn btn-outline-success">View Profile</button></a>
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card border-info text-center">
+                    <div class="card-body">
+                        <img style="border-radius: 50%;height: 200px;width: 200px;margin-bottom: 20px;" src="../../uploads/default.png" alt="Default Image">
+                        <h5 id="sender" class="card-title"><%= currentUser.username %></h5>
+                        <p><i class="fa fa-circle" style="color: green;font-size: 10px;"></i> <span style="margin-top: 5px;">Online</span></p>
+                        <p><%= currentUser.email %></p>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-outline-info"><i class="fa fa-user"></i> View my profile</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card border-info">
+                    <div class="card-body">
+                        <h5 id="room-name" class="card-title"><%= name.replace(/-/g, " ") %></h5>
+                        <hr>
+                        <div class="messages">
+                            <ul id="messages__list" class="list-unstyled">
+                            
+                                    <% if(messages.length > 0) { %>
+                                    <% messages.forEach(function(message) { %>
+                                        <li>
+                                            <div class="pull-left">
+                                                <img src="../../uploads/<%= message.sender.userImage %>" class="img-circle">
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-10">
+                                                    <h6 style="font-weight: bolder;"><%= message.sender.username %></h6>
+                                                    <p><%= message.body %></p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    <% }); %>
+                                    <% } %>
+                            
+                            </ul>
+                        </div>
+                        <hr>
+                        <div class="send-message d-flex align-items-center">
+                            <input type="text" placeholder="Your Message" id="msg" name="message" class="form-control">
+                            &nbsp;
+                            <button id="send-msg" class="btn btn-info" style="border-radius: 50%;"><i class="fa fa-send"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border-info">
+                    <div class="card-header">
+                        <i class="fa fa-group"></i>
+                        Online <span id="no-of-users"></span>
+                    </div>
+                    <div id="online-users" class="card-body online-cards-body"> 
+                    </div>
+                </div>
+                <br>
+                <div class="card border-info">
+                    <div class="card-header">
+                        Online Friends <span id="num-of-friends"></span>
+                    </div>
+                    <% if(currentUser.friendsList.length > 0) { %>
+                        <% currentUser.friendsList.forEach(function(friend) { %>
+                            <div class="friend" hidden>@<%= friend.friendUsername %></div>
+                        <% }) %>
+                    <% } %>
+                    <div id="online-friends" class="card-body online-cards-body">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="../../javascript/group/groupchat.js"></script>
+    <script src="../../javascript/group/sendRequest.js"></script>
+    <script src="../../javascript/messagelink.js"></script>
+<% include ../partials/footer.ejs %>

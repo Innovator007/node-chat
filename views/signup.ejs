@@ -1,3 +1,65 @@
+<% include partials/header.ejs %>
+    <div class="container">
+            <% if(hasErrors) { %>
+                <% messages.forEach(function(message) { %>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    
+                        <%= message %><br> 
+                    
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <% }) %>
+            <% } %>
+        <div class="row">
+            <div class="col-md-12 d-flex justify-content-center">
+                    <div class="card border-info">
+                        <div class="card-body">
+                            <h2 class="card-title text-center">CHATTY SIGNUP</h2>
+                            <h1>
+                                <a href="/auth/facebook">
+                                <span class="btn-social btn-facebook btn-lg btn-block">
+                                    <i class="fa fa-facebook"></i>
+                                    Signup with Facebook
+                                </span>
+                                </a>
+                            </h1>
+                            <h1>
+                                <a href="/auth/google">
+                                <span class="btn-social btn-google btn-lg btn-block">
+                                    <i class="fa fa-google"></i>
+                                    Signup with Google
+                                </span>
+                                </a>
+                            </h1>
+                            <div class="row desktop">
+                                <div class="col-md-5 col-xs-5"><hr></div>
+                                <div class="col-md-2 col-xs-2" style="margin-top: 5px;">OR</div>
+                                <div class="col-md-5 col-xs-5"><hr></div>
+                            </div>
+                            <form action="/signup" method="post">
+                                <div class="form-group">
+                                    <label for="username">Username: </label>
+                                    <input type="text" name="username" class="form-control" id="username" placeholder="username">
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email Address: </label>
+                                    <input type="email" name="email" id="email" class="form-control" placeholder="someone@gmail.com">
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Password: </label>
+                                    <input type="password" name="password" id="password" class="form-control" placeholder="password">
+                                </div>
+                                <button class="btn btn-info">SIGNUP</button>
+                            </form>
+                            <div style="margin-top: 10px;" class="text-center">
+                                <a href="/">Already have an account?</a>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
 
-
-<h1>Signup <%= page %> </h1>
+<% include partials/footer.ejs %>
