@@ -3,7 +3,7 @@ $(document).ready(function() {
 
     var room = $("#room-name").text();
     var sender = $("#sender").text();
-
+    $('.messages').animate({scrollTop: $('.messages').prop("scrollHeight")}, 2000);
     socket.on("connect", function() {
         console.log("Connected!");
         var params = {
@@ -35,7 +35,7 @@ $(document).ready(function() {
         $("#messages__list").append(`
         <li>
             <div class="pull-left">
-                <img src="http://placehold.it/300x300" class="img-circle">
+                <img src="../uploads/${message.userImage}" class="img-circle">
             </div>
             <div class="row">
                 <div class="col-md-10">
@@ -45,19 +45,21 @@ $(document).ready(function() {
             </div>
         </li>
         `)
+        $('.messages').animate({scrollTop: $('.messages').prop("scrollHeight")}, 500);
     });
 
     $("#send-msg").on("click", function(e) {
         e.preventDefault();
         var msg = $("#msg").val();
-
+        var userImage = $("#user-image").val();
         if(msg.trim() === "") {
             return false;
         } else {
             socket.emit("createMessage", {
                 value: msg,
                 room: room,
-                sender: sender
+                sender: sender,
+                userImage: userImage
             });
             $("#msg").val(""); 
 
@@ -74,6 +76,41 @@ $(document).ready(function() {
                 }
             })
         }
+    });
+
+    $(document).keypress(function (e) {
+        var key = e.which;
+        if(key == 13)  // the enter key code
+         {
+            e.preventDefault();
+            var msg = $("#msg").val();
+            var userImage = $("#user-image").val();
+            if(msg.trim() === "") {
+                return false;
+            } else {
+                socket.emit("createMessage", {
+                    value: msg,
+                    room: room,
+                    sender: sender,
+                    userImage: userImage
+                });
+                $("#msg").val(""); 
+    
+                $.ajax({
+                    type: "POST",
+                    url: "/group/" + room + "/message",
+                    data: {
+                        message: msg,
+                        group: room
+                    },
+                    success: function() {
+                        $("#msg").val("");
+                        console.log("Group Message Sent successfully");
+                    }
+                })
+            }
+           return false;  
+         }
     });
 
 });

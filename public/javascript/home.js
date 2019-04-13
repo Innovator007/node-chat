@@ -10,7 +10,6 @@ $(document).ready(function() {
                 groupName: groupName
             },
             success: function() {
-                console.log(groupName + " added to favourites!");
                 window.location.reload();
             }
         });

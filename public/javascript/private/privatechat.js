@@ -1,5 +1,6 @@
 $(document).ready(function() {
     var socket = io();
+    $('.messages').animate({scrollTop: $('.messages').prop("scrollHeight")}, 2000);
     var paramOne = deparam(window.location.pathname);
     var newParams = paramOne.split(".");
     var receiverName = newParams[0];
@@ -23,7 +24,7 @@ $(document).ready(function() {
         $("#messages__list").append(`
             <li>
                 <div class="pull-left">
-                    <img src="http://placehold.it/300x300" class="img-circle">
+                    <img src="../uploads/${message.userImage}" class="img-circle">
                 </div>
                 <div class="row">
                     <div class="col-md-10">
@@ -33,14 +34,16 @@ $(document).ready(function() {
                 </div>
             </li>
         `)
+        $('.messages').animate({scrollTop: $('.messages').prop("scrollHeight")}, 500);
     });
 
     $("#send-msg").on("click", function(e) {
         e.preventDefault();
         var msg = $("#msg").val();
         var senderName = $("#sender-name").val();
+        var userImage = $("#user-image").val();
         if(msg.trim().length > 0) {
-            socket.emit('private message',{ value: msg, sender: senderName, room: paramOne }, function() {
+            socket.emit('private message',{ value: msg, sender: senderName, room: paramOne, userImage: userImage }, function() {
                 $("#msg").val("");
             });
             $.ajax({
@@ -55,6 +58,33 @@ $(document).ready(function() {
             })
         }
         
+    });
+
+    $(document).keypress(function (e) {
+        var key = e.which;
+        if(key == 13)  // the enter key code
+         {
+            e.preventDefault();
+        var msg = $("#msg").val();
+        var senderName = $("#sender-name").val();
+        var userImage = $("#user-image").val();
+        if(msg.trim().length > 0) {
+            socket.emit('private message',{ value: msg, sender: senderName, room: paramOne, userImage: userImage }, function() {
+                $("#msg").val("");
+            });
+            $.ajax({
+                url: "/chat/" + paramOne,
+                type: "POST",
+                data: {
+                    message: msg
+                },
+                success: function(data) {
+                    $("#msg").val("");
+                }
+            })
+        }
+           return false;  
+         }
     });
 
 });

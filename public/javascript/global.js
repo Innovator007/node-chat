@@ -10,11 +10,11 @@ $(document).ready(function() {
             name: name,
             image: image
         })
+        socket.on('message display', function() {
+            $("#reload").load(location.href + ' #reload');
+        });
     });
 
-    socket.on('message display', function() {
-        $("#reload").load(location.href + ' #reload');
-    });
 
     socket.on('loggedInUser', function(users) {
         var friends = $(".friend").text();

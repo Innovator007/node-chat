@@ -56,7 +56,19 @@ const userSchema = mongoose.Schema({
         friendUsername: {
             type: String
         }
-    }]
+    }],
+    gender: {
+        type: String,
+        default: ""
+    },
+    country: {
+        type: String,
+        default: ""
+    },
+    desc: {
+        type: String,
+        default: ""
+    }
 });
 
 userSchema.methods.encryptPassword = function(password) {

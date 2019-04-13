@@ -8,7 +8,8 @@ module.exports = function(io) {
         socket.on('private message', function(message, callback) {
             io.to(message.room).emit('new private message', {
                 value: message.value,
-                sender: message.sender
+                sender: message.sender,
+                userImage: message.userImage
             });
 
             io.emit('message display', {});

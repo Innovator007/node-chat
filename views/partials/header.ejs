@@ -80,7 +80,7 @@
                                                     <span><%= data.body.message.substr(0,20) %>...</span>
                                                 </div>
                                             </div></a>
-
+                                            <hr>
                                     <% } else if(data.body.senderName === currentUser.username) { %>
 
                                         <a data-value="<%= data.body._id %>" class="messageLink" href="/chat/<%= data.body.receiverName.toLowerCase().replace(/ /g,'-') %>.<%= currentUser.username.toLowerCase().replace(/ /g, '-') %>"><div class="container d-flex">
@@ -97,7 +97,7 @@
                                                     <span><%= data.body.message.substr(0,20) %>...</span>
                                                 </div>
                                             </div></a>
-
+                                            <hr>
                                     <% } %>
 
                                 <% }); %>
@@ -136,7 +136,7 @@
                                 <%= currentUser.username %> 
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown2">
-                                <a class="dropdown-item" href="#">View Profile</a>
+                                <a class="dropdown-item" href="/profile"><i class="fa fa-user"></i> View Profile</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="/logout"><i class="fa fa-sign-out"></i> Logout</a>
                             </div>

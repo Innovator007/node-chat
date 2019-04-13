@@ -24,13 +24,13 @@
             <div class="col-md-3">
                 <div class="card border-info text-center">
                     <div class="card-body">
-                        <img style="border-radius: 50%;height: 200px;width: 200px;margin-bottom: 20px;" src="../../uploads/default.png" alt="Default Image">
+                        <img style="border-radius: 50%;height: 200px;width: 200px;margin-bottom: 20px;" src="../../uploads/<%= currentUser.userImage %>" alt="Default Image">
                         <h5 id="sender" class="card-title"><%= currentUser.username %></h5>
                         <p><i class="fa fa-circle" style="color: green;font-size: 10px;"></i> <span style="margin-top: 5px;">Online</span></p>
                         <p><%= currentUser.email %></p>
                     </div>
                     <div class="card-footer">
-                        <button class="btn btn-outline-info"><i class="fa fa-user"></i> View my profile</button>
+                        <a href="/profile"><button class="btn btn-outline-info"><i class="fa fa-user"></i> View my profile</button></a>
                     </div>
                 </div>
             </div>

@@ -1,0 +1,108 @@
+<% include ../partials/header.ejs %>
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-md-4">
+                    <div class="card">
+
+                        <div class="card-body">
+                            <div class="text-center">
+                                    <img id="profile-img" style="border-radius: 50%;height: 200px;width: 200px;margin-bottom: 20px;" src="../../uploads/<%= currentUser.userImage %>" alt="Default Image">
+                                    <h5 class="card-title">
+                                        <% if(currentUser.fullname === "") { %>
+                                            <%= currentUser.username %>
+                                        <% } else { %>
+                                            <%= currentUser.fullname %> 
+                                        <% } %>
+                                    </h5>
+                                    <p>@<%= currentUser.username %></p>
+                            </div>
+                            <div class="list-group">
+
+                                    <a href="/profile/<%= currentUser.username %>" class="list-group-item list-group-item-action"><i class="fa fa-home"></i> Overview</a>
+                                    <a style="color: #fff !important;" href="/profile" class="list-group-item list-group-item-action active"><i class="fa fa-user"></i> Profile</a>
+                                    <a href="/profile/friends" class="list-group-item list-group-item-action"><i class="fa fa-group"></i> Friends</a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-md-8">
+
+                    <div class="card">
+
+                        <div class="card-body">
+
+                            <h2 class="card-title">Personal Information</h2>
+                            <div id="error"></div>
+                            <form action="/profile" method="POST" id="profile-form">
+
+                                    <div class="form-group">
+                                        <input type="text" id="fullname" value="<%= currentUser.fullname %>" name="fullname" placeholder="FullName" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" id="country" value="<%= currentUser.country %>" name="country" placeholder="Country" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Gender :</label>&nbsp;&nbsp;
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                            <% if(currentUser.gender === "Male") { %>
+                                                <input type="radio" checked id="customRadioInline1" name="gender" value="Male" class="custom-control-input">
+                                            <% } else { %>
+                                                <input type="radio" id="customRadioInline1" name="gender" value="Male" class="custom-control-input">
+                                            <% } %>
+                                            <label class="custom-control-label" for="customRadioInline1">Male</label>
+                                        </div>
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                                <% if(currentUser.gender === "Female") { %>
+                                                    <input type="radio" checked id="customRadioInline2" name="gender" value="Female" class="custom-control-input">
+                                                <% } else { %>
+                                                    <input type="radio" id="customRadioInline2" name="gender" value="Female" class="custom-control-input">
+                                                <% } %>
+                                            
+                                            <label class="custom-control-label" for="customRadioInline2">Female</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <textarea name="desc" id="desc" rows="4" placeholder="Description Mantra" class="form-control"><%= currentUser.desc %></textarea>
+                                    </div>
+                                    <div class="form-group">
+        
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" value="<%= currentUser.userImage %>" name="image" id="profile-image">
+                                            <label class="custom-file-label" for="customFile">Upload Profile Image</label>
+                                        </div>
+                                        <span id="completed"></span>
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <button type="submit" id="save-btn" class="btn btn-success btn-lg btn-block">Save Profile</button>
+
+                                    </div>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <script src="/socket.io/socket.io.js"></script> 
+        <script src="/javascript/home.js"></script>
+        <script src="/javascript/group/sendRequest.js"></script>
+        <script src="/javascript/messagelink.js"></script>
+        <script src="/javascript/user/profile.js"></script>
+
+<% include ../partials/footer.ejs %>

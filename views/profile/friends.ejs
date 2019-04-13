@@ -1,0 +1,74 @@
+<% include ../partials/header.ejs %>
+
+        <div class="container">
+
+            <div class="row">
+                    <div class="col-md-4">
+                            <div class="card">
+        
+                                <div class="card-body">
+                                    <div class="text-center">
+                                            <img id="profile-img" style="border-radius: 50%;height: 200px;width: 200px;margin-bottom: 20px;" src="../../uploads/<%= currentUser.userImage %>" alt="Default Image">
+                                            <h5 class="card-title">
+                                                <% if(currentUser.fullname === "") { %>
+                                                    <%= currentUser.username %>
+                                                <% } else { %>
+                                                    <%= currentUser.fullname %> 
+                                                <% } %>
+                                            </h5>
+                                            <p>@<%= currentUser.username %></p>
+                                    </div>
+                                    <div class="list-group">
+        
+                                        <a href="/profile/<%= currentUser.username %>" class="list-group-item list-group-item-action"><i class="fa fa-home"></i> Overview</a>
+                                        <a href="/profile" class="list-group-item list-group-item-action"><i class="fa fa-user"></i> Profile</a>
+                                        <a style="color: #fff !important;" href="/profile/friends" class="list-group-item list-group-item-action active"><i class="fa fa-group"></i> Friends</a>
+        
+                                    </div>
+        
+                                </div>
+        
+                            </div>
+                        </div>
+
+                <div class="col-md-8">
+
+                    <div class="card">
+
+                        <div class="card-body">
+
+                            <h4 class="card-title">Friends</h4>
+
+                            <div class="row">
+
+                                <% currentUser.friendsList.forEach(function(member) { %>
+                                    <div class="col-md-3">
+                                        <a href="/chat/<%= member.friendUsername.toLowerCase().replace(/ /g, '-') %>.<%= currentUser.username.toLowerCase().replace(/ /g, '-') %>">
+                                        <div class="card border-info">
+                                            <div class="card-body text-center">
+                                                <h5 class="card-title"><%= member.friendUsername %></h5>
+                                            </div>
+                                        </div>
+                                        </a>
+                                    </div>
+                                <% }) %>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <script src="/socket.io/socket.io.js"></script> 
+        <script src="/javascript/home.js"></script>
+        <script src="/javascript/group/sendRequest.js"></script>
+        <script src="/javascript/messagelink.js"></script>
+        <script src="/javascript/user/profile.js"></script>
+
+<% include ../partials/footer.ejs %>
