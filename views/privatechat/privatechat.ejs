@@ -19,12 +19,13 @@
             <div class="col-md-6">
                 <div class="card border-info">
                     <div class="card-body">
-                        <h5 style="text-transform: capitalize;" id="receiver-name" class="card-title"></h5>
+                        <h5 id="receiver-name" class="card-title"></h5>
                         <hr>
                         <div class="messages">
                             <ul id="messages__list" class="list-unstyled">
                                 <% if(messages.length > 0) { %>
                                 <% messages.forEach(function(message) { %>
+                                    <% if(name === message.receiver.username.toLowerCase()) { %>
                                     <li>
                                         <div class="pull-left">
                                             <img src="../../uploads/<%= message.userImage %>" class="img-circle">
@@ -36,6 +37,19 @@
                                             </div>
                                         </div>
                                     </li>
+                                    <% } else if (name === message.sender.username.toLowerCase()) { %>
+                                        <li>
+                                            <div class="pull-left">
+                                                <img src="../../uploads/<%= message.userImage %>" class="img-circle">
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-10">
+                                                    <h6 style="font-weight: bolder;"><%= message.senderName %></h6>
+                                                    <p><%= message.message %></p>
+                                                </div>
+                                            </div>
+                                        </li>    
+                                    <% } %>
                                 <% }); %>
                                 <% } %>
                             </ul>
@@ -65,6 +79,7 @@
             </div>
         </div>
     </div>
+
     <script src="/socket.io/socket.io.js"></script>
     <script src="../../javascript/global.js"></script>
     <script src="../../javascript/private/privatechat.js"></script>

@@ -43,15 +43,39 @@
                         <p>Description : <%= user.desc %></p>
 
                         <p>Friends :</p>
+                        <div class="row">
                         <% user.friendsList.forEach(function(friend) { %>
                             <div class="col-md-4">
+                                <a href="/profile/<%= friend.friendUsername %>">
                                     <div class="card border-info">
                                         <div class="card-body text-center">
                                             <h4 class="card-title"><%= friend.friendUsername %></h4>
                                         </div>
                                     </div>
+                                </a>
                             </div>
                         <% }); %>
+                        </div>
+                        <br>
+                        <p>Favourite Groups :</p>
+                        <div class="row">
+
+                            <% favGroups.reverse().forEach(function(group) { %>
+
+                                <div class="col-md-3" style="margin-bottom: 10px;">
+                                    <div class="card border-info">
+                                        <a href="/group/<%= group.name.replace(/ /g, '-') %>">
+                                        <img src="../../uploads/<%= group.image %>" class="card-img-top">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><%= group.name %></h5>
+                                        </div>
+                                        </a>
+                                    </div>
+                                </div>
+
+                            <% }); %>
+                             
+                        </div>
                 </div>
 
 

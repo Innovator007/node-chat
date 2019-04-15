@@ -6,7 +6,7 @@ const Group = require('../models/groups');
 module.exports = function(formidable) {
     return {
         setRouting: function(router) {
-            router.get("/dashboard", function(req,res) {
+            router.get("/admin/dashboard", function(req,res) {
                 res.render("admin/dashboard");
             });
 

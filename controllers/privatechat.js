@@ -5,7 +5,6 @@ module.exports = function(async) {
     return {
         setRouting: function(router) {
             router.get('/chat/:name', function(req,res) {
-
                 async.parallel([
                     function(callback) {
                         User.findOne({

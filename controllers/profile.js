@@ -1,5 +1,6 @@
 const Message = require("../models/message");
 const User = require('../models/user');
+const Group = require("../models/groups");
 const path = require('path');
 const fs = require('fs');
 
@@ -221,12 +222,23 @@ module.exports = function(async, formidable) {
                         User.findOne({"username": req.params.name}, function(err, user) {
                             callback(err,user);
                         });
+                    },
+                    function(callback) {
+                        Group.find({
+                            "favourites": {
+                                $elemMatch: { "username": req.params.name }
+                            }
+                        }, { name: 1, image: 1 } ,function(err, groups) {
+                            callback(err, groups);
+                        });
                     }
                 ], function(err, results) {
                     const result3 = results[0];
                     const result4 = results[1];
                     const result5 = results[2];
-                    res.render("profile/overview", { data: result3, chat: result4, user: result5 });
+                    const result6 = results[3];
+                    
+                    res.render("profile/overview", { data: result3, chat: result4, user: result5, favGroups: result6 });
                 });
             });
 

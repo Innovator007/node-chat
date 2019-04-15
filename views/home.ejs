@@ -31,12 +31,24 @@
                         </form>
                     </div>
                 </div>
+                <div class="card border-info">
+                    <div class="card-header">
+                        Online Friends <span id="num-of-friends"></span>
+                    </div>
+                    <% if(currentUser.friendsList.length > 0) { %>
+                        <% currentUser.friendsList.forEach(function(friend) { %>
+                            <div class="friend" hidden>@<%= friend.friendUsername %></div>
+                        <% }) %>
+                    <% } %>
+                    <div id="online-friends" class="card-body online-cards-body">
+                    </div>
+                </div>
             </div>
             <div class="col-md-9">
                 <div class="container">
                     <div class="row">
                         <% if(groups.length > 0) { %>
-                        <% groups.forEach(function(group) { %>
+                        <% groups.reverse().forEach(function(group) { %>
                             <div class="col-md-4" style="margin-bottom: 10px;">
                                 <div class="card border-info">
                                     <a href="/group/<%= group.name.replace(/ /g, '-') %>">
@@ -72,6 +84,7 @@
     </div>
 
     <script src="/socket.io/socket.io.js"></script> 
+    <script src="../javascript/global.js"></script>
     <script src="../javascript/home.js"></script>
     <script src="../javascript/group/sendRequest.js"></script>
     <script src="../../javascript/messagelink.js"></script>
