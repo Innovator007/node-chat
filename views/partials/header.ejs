@@ -75,7 +75,7 @@
                                             </div></a>
                                             <hr>
                                     <% } else if(data.body.senderName === currentUser.username) { %>
-
+                                        <hr>
                                         <a data-value="<%= data.body._id %>" class="messageLink" href="/chat/<%= data.body.receiverName.toLowerCase().replace(/ /g,'-') %>.<%= currentUser.username.toLowerCase().replace(/ /g, '-') %>"><div class="container d-flex">
                                                 <img class="mr-2" src="../../uploads/<%= data.body.userImage %>" style="width:50px;height: 50px;border-radius: 50%;">
                                                 <div>
