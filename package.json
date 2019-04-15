@@ -2,9 +2,15 @@
   "name": "node-chat",
   "version": "1.0.0",
   "description": "Node Chat Application with socket.io",
+  "engines": {
+    "node": "11.3.0",
+    "npm": "6.9.0"
+  },
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -20,16 +26,19 @@
     "async": "^2.6.2",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.3",
+    "compression": "^1.7.4",
     "connect-flash": "^0.1.1",
     "connect-mongo": "^2.0.3",
     "cookie-parser": "^1.4.4",
     "dependable": "^1.1.0",
+    "dotenv": "^7.0.0",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "express-promise-router": "^3.0.3",
     "express-session": "^1.15.6",
     "express-validator": "^5.3.1",
     "formidable": "^1.2.1",
+    "helmet": "^3.16.0",
     "lodash": "^4.17.11",
     "mongoose": "^5.4.19",
     "passport": "^0.4.0",

@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const ejs = require('ejs');
@@ -13,13 +15,16 @@ const passport = require('passport');
 const socketIO = require('socket.io');
 const { Users } = require('./helpers/userClass');
 const { Global } = require('./helpers/Global');
+const compression = require('compression');
+const helmet = require('helmet');
+const config = require("./config/config");
 
 const container = require('./container');
 
 container.resolve(function(users, admin, home, group, privatechat, profile, _) {
 
     mongoose.Promise = global.Promise;
-    mongoose.connect('mongodb://iliyas:hesoyam007@ds123196.mlab.com:23196/nodechat', { useNewUrlParser: true });
+    mongoose.connect(process.env.MONGO_DB_URI, { useNewUrlParser: true });
 
     const app = setupExpress();
 
@@ -27,8 +32,9 @@ container.resolve(function(users, admin, home, group, privatechat, profile, _) {
         const app = express();
         const server = http.createServer(app);
         const io = socketIO(server);
-        server.listen(3000, function() {
-            console.log("Node Chat Application running on port 3000");
+        const port = process.env.PORT || 3000;
+        server.listen(port, function() {
+            console.log("Node Chat Application running on port " + port);
         }); 
         configureExpress(app); 
 
@@ -49,6 +55,10 @@ container.resolve(function(users, admin, home, group, privatechat, profile, _) {
     }
 
     function configureExpress(app) {
+
+        app.use(compression());
+        app.use(helmet());
+
         require('./passport/passport-local');
         require('./passport/passport-facebook');
         require('./passport/passport-google');
@@ -63,7 +73,7 @@ container.resolve(function(users, admin, home, group, privatechat, profile, _) {
         app.use(bodyParser.urlencoded({ extended: true }));
         app.use(validator());
         app.use(session({
-            secret: "NodeCHAT",
+            secret: process.env.SECRET_KEY,
             resave: false,
             saveUninitialized: false,
             store: new MongoStore({mongooseConnection: mongoose.connection})

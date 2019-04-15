@@ -1,1 +1,1 @@
-Node-Chat Application with Socket.io
+Node-Chat Application named Chatty with Socket.io
