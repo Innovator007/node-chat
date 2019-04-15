@@ -15,9 +15,6 @@ const passport = require('passport');
 const socketIO = require('socket.io');
 const { Users } = require('./helpers/userClass');
 const { Global } = require('./helpers/Global');
-const compression = require('compression');
-const helmet = require('helmet');
-const config = require("./config/config");
 
 const container = require('./container');
 
@@ -55,10 +52,6 @@ container.resolve(function(users, admin, home, group, privatechat, profile, _) {
     }
 
     function configureExpress(app) {
-
-        app.use(compression());
-        app.use(helmet());
-
         require('./passport/passport-local');
         require('./passport/passport-facebook');
         require('./passport/passport-google');
@@ -66,7 +59,6 @@ container.resolve(function(users, admin, home, group, privatechat, profile, _) {
         app.use(express.static(__dirname + "/public"));
         app.use(cookieParser());
 
-        app.engine("html", ejs.renderFile);
         app.set('view engine', 'ejs');
         app.set('views', path.join(__dirname, 'views'));
         app.use(bodyParser.json());
