@@ -56,7 +56,7 @@
                                     <% if(data.body.senderName !== currentUser.username) { %>
                                         <hr>
                                         <a data-value="<%= data.body._id %>" class="messageLink" href="/chat/<%= data.body.senderName.toLowerCase().replace(/ /g,'-') %>.<%= currentUser.username.toLowerCase().replace(/ /g, '-') %>"><div class="container d-flex">
-                                            <% if(data.body.userImage.match(/https/i)["index"] === 0) { %>
+                                            <% if(data.body.userImage.match(/https/i)) { %>
                                                 <img class="mr-2" src="<%= data.body.userImage %>" style="width:50px;height: 50px;border-radius: 50%;">
                                             <% } else { %>
                                                 <img class="mr-2" src="../../uploads/<%= data.body.userImage %>" style="width:50px;height: 50px;border-radius: 50%;">
@@ -81,7 +81,7 @@
                                     <% } else if(data.body.senderName === currentUser.username) { %>
                                         <hr>
                                         <a data-value="<%= data.body._id %>" class="messageLink" href="/chat/<%= data.body.receiverName.toLowerCase().replace(/ /g,'-') %>.<%= currentUser.username.toLowerCase().replace(/ /g, '-') %>"><div class="container d-flex">
-                                                <% if(data.body.userImage.match(/https/i)["index"] === 0) { %>
+                                                <% if(data.body.userImage.match(/https/i)) { %>
                                                     <img class="mr-2" src="<%= data.body.userImage %>" style="width:50px;height: 50px;border-radius: 50%;">
                                                 <% } else { %>
                                                     <img class="mr-2" src="../../uploads/<%= data.body.userImage %>" style="width:50px;height: 50px;border-radius: 50%;">
@@ -121,7 +121,7 @@
                                 <% if(data.requests.length > 0) { %>
                                 <% data.requests.forEach(function(request) { %>
                                     <div id="<%= request.userId._id %>" class="container d-flex align-items-center">
-                                        <% if(request.userId.userImage.match(/https/i)["index"] === 0) { %>
+                                        <% if(request.userId.userImage.match(/https/i)) { %>
                                             <img class="mr-2" src="<%= request.userId.userImage %>" style="width:50px;height: 50px;border-radius: 50%;">
                                         <% } else { %>
                                             <img class="mr-2" src="../../uploads/<%= request.userId.userImage %>" style="width:50px;height: 50px;border-radius: 50%;">
