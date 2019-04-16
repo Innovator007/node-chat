@@ -50,11 +50,12 @@
                                     <% messages.forEach(function(message) { %>
                                         <li>
                                             <div class="pull-left">
-                                                    <% if(message.sender.userImage.match(/https/i)["index"] === 0) { %>
-                                                        <img src="<%= message.sender.userImage %>" class="img-circle">
-                                                    <% } else { %>
-                                                        <img src="../../uploads/<%= message.sender.userImage %>" class="img-circle">
-                                                    <% } %>
+                                            
+                                            <% if(message.sender.userImage.match(/https/i)) { %>
+                                                <img src="<%= message.sender.userImage %>" class="img-circle">
+                                            <% } else { %>
+                                                <img src="../../uploads/<%= message.sender.userImage %>" class="img-circle">
+                                            <% } %>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-10">
