@@ -32,7 +32,7 @@
                                     <% if(name === message.receiver.username.toLowerCase()) { %>
                                     <li>
                                         <div class="pull-left">
-                                            <% if(message.userImage.match(/https/i)["index"] === 0) { %>
+                                            <% if(message.userImage.match(/https/i)) { %>
                                                 <img src="<%= message.userImage %>" class="img-circle">
                                             <% } else { %>
                                                 <img src="../../uploads/<%= message.userImage %>" class="img-circle">
@@ -48,7 +48,7 @@
                                     <% } else if (name === message.sender.username.toLowerCase()) { %>
                                         <li>
                                             <div class="pull-left">
-                                                <% if(message.userImage.match(/https/i)["index"] === 0) { %>
+                                                <% if(message.userImage.match(/https/i)) { %>
                                                     <img src="<%= message.userImage %>" class="img-circle">
                                                 <% } else { %>
                                                     <img src="../../uploads/<%= message.userImage %>" class="img-circle">

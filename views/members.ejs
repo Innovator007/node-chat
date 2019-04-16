@@ -76,7 +76,7 @@
                     <div class="col-md-3">
                         <a href="/profile/<%= member.username %>">
                         <div class="card border-info" style="width: 100%;">
-                            <% if(member.userImage.match(/https/i)["index"] === 0) { %>
+                            <% if(member.userImage.match(/https/i)) { %>
                                 <img class="card-img-top" src="<%= member.userImage %>" alt="User image">
                             <% } else { %>
                                 <img class="card-img-top" src="../uploads/<%= member.userImage %>" alt="User image">
