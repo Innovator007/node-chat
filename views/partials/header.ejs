@@ -56,8 +56,12 @@
                                     <% if(data.body.senderName !== currentUser.username) { %>
                                         <hr>
                                         <a data-value="<%= data.body._id %>" class="messageLink" href="/chat/<%= data.body.senderName.toLowerCase().replace(/ /g,'-') %>.<%= currentUser.username.toLowerCase().replace(/ /g, '-') %>"><div class="container d-flex">
+                                            <% if(data.body.userImage.match(/https/i)["index"] === 0) { %>
+                                                <img class="mr-2" src="<%= data.body.userImage %>" style="width:50px;height: 50px;border-radius: 50%;">
+                                            <% } else { %>
                                                 <img class="mr-2" src="../../uploads/<%= data.body.userImage %>" style="width:50px;height: 50px;border-radius: 50%;">
-                                                <div>
+                                            <% } %>
+                                            <div>
                                                     <h6>
                                                         <% if(currentUser.username !== data.body.receiverName) { %>
                                                             <%= data.body.receiverName %>
@@ -77,7 +81,11 @@
                                     <% } else if(data.body.senderName === currentUser.username) { %>
                                         <hr>
                                         <a data-value="<%= data.body._id %>" class="messageLink" href="/chat/<%= data.body.receiverName.toLowerCase().replace(/ /g,'-') %>.<%= currentUser.username.toLowerCase().replace(/ /g, '-') %>"><div class="container d-flex">
-                                                <img class="mr-2" src="../../uploads/<%= data.body.userImage %>" style="width:50px;height: 50px;border-radius: 50%;">
+                                                <% if(data.body.userImage.match(/https/i)["index"] === 0) { %>
+                                                    <img class="mr-2" src="<%= data.body.userImage %>" style="width:50px;height: 50px;border-radius: 50%;">
+                                                <% } else { %>
+                                                    <img class="mr-2" src="../../uploads/<%= data.body.userImage %>" style="width:50px;height: 50px;border-radius: 50%;">
+                                                <% } %>
                                                 <div>
                                                     <h6>
                                                         <% if(currentUser.username !== data.body.receiverName) { %>
@@ -113,7 +121,11 @@
                                 <% if(data.requests.length > 0) { %>
                                 <% data.requests.forEach(function(request) { %>
                                     <div id="<%= request.userId._id %>" class="container d-flex align-items-center">
-                                        <img class="mr-2" src="../../uploads/<%= request.userId.userImage %>" style="width:50px;height: 50px;border-radius: 50%;">
+                                        <% if(request.userId.userImage.match(/https/i)["index"] === 0) { %>
+                                            <img class="mr-2" src="<%= request.userId.userImage %>" style="width:50px;height: 50px;border-radius: 50%;">
+                                        <% } else { %>
+                                            <img class="mr-2" src="../../uploads/<%= request.userId.userImage %>" style="width:50px;height: 50px;border-radius: 50%;">
+                                        <% } %>
                                         <span class="mr-5"><%= request.username %></span>
                                         <input type="hidden" name="senderId" id="senderId" value="<%= request.userId._id %>">
                                         <input type="hidden" name="senderName" id="senderName" value="<%= request.username %>">

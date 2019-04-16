@@ -21,19 +21,35 @@ $(document).ready(function() {
     });
 
     socket.on("new private message", function(message) {
-        $("#messages__list").append(`
-            <li>
-                <div class="pull-left">
-                    <img src="../uploads/${message.userImage}" class="img-circle">
-                </div>
-                <div class="row">
-                    <div class="col-md-10">
-                        <h6 style="font-weight: bolder;">${message.sender}</h6>
-                        <p>${message.value}</p>
+        if(message.userImage.match(/https/i)["index"] === 0) {
+            $("#messages__list").append(`
+                <li>
+                    <div class="pull-left">
+                        <img src="${message.userImage}" class="img-circle">
                     </div>
-                </div>
-            </li>
-        `)
+                    <div class="row">
+                        <div class="col-md-10">
+                            <h6 style="font-weight: bolder;">${message.sender}</h6>
+                            <p>${message.value}</p>
+                        </div>
+                    </div>
+                </li>
+            `)
+        } else {
+            $("#messages__list").append(`
+                <li>
+                    <div class="pull-left">
+                        <img src="../uploads/${message.userImage}" class="img-circle">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <h6 style="font-weight: bolder;">${message.sender}</h6>
+                            <p>${message.value}</p>
+                        </div>
+                    </div>
+                </li>
+            `)
+        }
         $('.messages').animate({scrollTop: $('.messages').prop("scrollHeight")}, 500);
     });
 

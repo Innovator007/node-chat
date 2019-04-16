@@ -6,7 +6,11 @@
             <div class="col-md-3 desktop">
                 <div class="card border-info text-center">
                     <div class="card-body">
-                        <img style="border-radius: 50%;height: 200px;width: 200px;margin-bottom: 20px;" src="../../uploads/<%= currentUser.userImage %>" alt="Default Image">
+                        <% if(currentUser.userImage.match(/https/i)["index"] === 0) { %>
+                            <img style="border-radius: 50%;height: 200px;width: 200px;margin-bottom: 20px;" src="<%= currentUser.userImage %>" alt="Default Image">
+                        <% } else { %>
+                            <img style="border-radius: 50%;height: 200px;width: 200px;margin-bottom: 20px;" src="../../uploads/<%= currentUser.userImage %>" alt="Default Image">
+                        <% } %>
                         <h5 id="sender" class="card-title"><%= currentUser.username %></h5>
                         <p><i class="fa fa-circle" style="color: green;font-size: 10px;"></i> <span style="margin-top: 5px;">Online</span></p>
                         <p><%= currentUser.email %></p>
@@ -28,7 +32,11 @@
                                     <% if(name === message.receiver.username.toLowerCase()) { %>
                                     <li>
                                         <div class="pull-left">
-                                            <img src="../../uploads/<%= message.userImage %>" class="img-circle">
+                                            <% if(message.userImage.match(/https/i)["index"] === 0) { %>
+                                                <img src="<%= message.userImage %>" class="img-circle">
+                                            <% } else { %>
+                                                <img src="../../uploads/<%= message.userImage %>" class="img-circle">
+                                            <% } %>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-10">
@@ -40,7 +48,11 @@
                                     <% } else if (name === message.sender.username.toLowerCase()) { %>
                                         <li>
                                             <div class="pull-left">
-                                                <img src="../../uploads/<%= message.userImage %>" class="img-circle">
+                                                <% if(message.userImage.match(/https/i)["index"] === 0) { %>
+                                                    <img src="<%= message.userImage %>" class="img-circle">
+                                                <% } else { %>
+                                                    <img src="../../uploads/<%= message.userImage %>" class="img-circle">
+                                                <% } %>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-10">
