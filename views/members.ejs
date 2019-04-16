@@ -74,12 +74,14 @@
             <div class="row">
                 <% members.forEach(function(member) { %>
                     <div class="col-md-3">
+                        <a href="/profile/<%= member.username %>">
                         <div class="card border-info" style="width: 100%;">
                             <img class="card-img-top" src="../uploads/<%= member.userImage %>" alt="User image">
                             <div class="card-body text-center">
                                 <h5 class="card-title"><%= member.username %></h5>
                             </div>
                         </div>
+                        </a>
                     </div>
                 <% }) %>
             </div>

@@ -9,6 +9,10 @@ body {
     font-family:"Raleway", sans-serif;
 }
 
+.card {
+    margin-bottom: 15px;
+}
+
 a {
     color: rgb(39, 38, 38) !important;
     text-decoration: none;
@@ -46,5 +50,8 @@ a:hover {
 @media (max-width: 768px) {
     .desktop {
         display: none !important;
+    }
+    #message-dropdown {
+        width: 100% !important;
     }
 }
