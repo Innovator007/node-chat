@@ -9,7 +9,7 @@
 
                         <div class="card-body">
                             <div class="text-center">
-                                <% if(currentUser.userImage.match(/https/i)["index"] === 0) { %>
+                                <% if(currentUser.userImage.match(/https/i)) { %>
                                     <img id="profile-img" style="border-radius: 50%;height: 200px;width: 200px;margin-bottom: 20px;" src="<%= currentUser.userImage %>" alt="Default Image">
                                 <% } else { %>
                                     <img id="profile-img" style="border-radius: 50%;height: 200px;width: 200px;margin-bottom: 20px;" src="../../uploads/<%= currentUser.userImage %>" alt="Default Image">
