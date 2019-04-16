@@ -24,7 +24,7 @@
             <div class="col-md-3 desktop">
                 <div class="card border-info text-center">
                     <div class="card-body">
-                            <% if(currentUser.userImage.match(/https/i)["index"] === 0) { %>
+                            <% if(currentUser.userImage.match(/https/i)) { %>
                                 <img style="border-radius: 50%;height: 200px;width: 200px;margin-bottom: 20px;" src="<%= currentUser.userImage %>" alt="Default Image">
                             <% } else { %>
                                 <img style="border-radius: 50%;height: 200px;width: 200px;margin-bottom: 20px;" src="../../uploads/<%= currentUser.userImage %>" alt="Default Image">
