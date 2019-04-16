@@ -32,7 +32,7 @@ $(document).ready(function() {
     });
 
     socket.on("newMessage", function(message) {
-        if(message.userImage.match(/https/i)["index"] === 0) {
+        if(message.userImage.match(/https/i)) {
             $("#messages__list").append(`
             <li>
                 <div class="pull-left">

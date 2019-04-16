@@ -21,7 +21,7 @@ $(document).ready(function() {
     });
 
     socket.on("new private message", function(message) {
-        if(message.userImage.match(/https/i)["index"] === 0) {
+        if(message.userImage.match(/https/i)) {
             $("#messages__list").append(`
                 <li>
                     <div class="pull-left">
