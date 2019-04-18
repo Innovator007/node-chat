@@ -2,6 +2,7 @@ const User = require('../models/user');
 const Message = require('../models/message');
 const GroupMessage = require('../models/groupmessage');
 const middleware = require("../middlewares/index");
+const moment = require("moment");
 
 module.exports = function(async) {
     return {
@@ -72,7 +73,7 @@ module.exports = function(async) {
                     const res1 = results[0];
                     const res2 = results[1];
                     const res3 = results[2];
-                    res.render("groupchat/group", { name:name, data: res1, chat: res2, messages: res3 });
+                    res.render("groupchat/group", { moment: moment, name:name, data: res1, chat: res2, messages: res3 });
                 });
             });
 

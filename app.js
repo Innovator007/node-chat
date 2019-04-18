@@ -15,6 +15,7 @@ const passport = require('passport');
 const socketIO = require('socket.io');
 const { Users } = require('./helpers/userClass');
 const { Global } = require('./helpers/Global');
+const moment = require("moment");
 
 const container = require('./container');
 
@@ -75,6 +76,7 @@ container.resolve(function(users, admin, home, group, privatechat, profile, _) {
         app.use(passport.session());
         app.use(function(req,res,next){
             res.locals.currentUser = req.user;
+            res.locals.moment = moment;
             next();
         });
     }

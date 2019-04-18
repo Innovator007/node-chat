@@ -1,3 +1,4 @@
+
 $(document).ready(function() {
     var socket = io();
 
@@ -49,7 +50,7 @@ $(document).ready(function() {
                 </div>
                 <div class="row">
                     <div class="col-md-10">
-                        <h6 style="font-weight: bolder;">${message.sender}</h6>
+                        <h6 style="font-weight: bolder;">${message.sender} <span style="font-size: 11px;margin-left: 10px;color: #333;">${moment(message.createdAt).fromNow()}</span></h6>
                         <p>${message.value}</p>
                     </div>
                 </div>
@@ -63,7 +64,7 @@ $(document).ready(function() {
                 </div>
                 <div class="row">
                     <div class="col-md-10">
-                        <h6 style="font-weight: bolder;">${message.sender}</h6>
+                        <h6 style="font-weight: bolder;">${message.sender} <span style="font-size: 11px;margin-left: 10px;color: #333;">${moment(message.createdAt).fromNow()}</span></h6>
                         <p>${message.value}</p>
                     </div>
                 </div>
@@ -84,7 +85,8 @@ $(document).ready(function() {
                 value: msg,
                 room: room,
                 sender: sender,
-                userImage: userImage
+                userImage: userImage,
+                createdAt: moment()
             });
             $("#msg").val(""); 
 
@@ -117,7 +119,8 @@ $(document).ready(function() {
                     value: msg,
                     room: room,
                     sender: sender,
-                    userImage: userImage
+                    userImage: userImage,
+                    createdAt: moment()
                 });
                 $("#msg").val(""); 
     

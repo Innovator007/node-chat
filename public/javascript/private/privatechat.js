@@ -29,7 +29,7 @@ $(document).ready(function() {
                     </div>
                     <div class="row">
                         <div class="col-md-10">
-                            <h6 style="font-weight: bolder;">${message.sender}</h6>
+                            <h6 style="font-weight: bolder;">${message.sender} <span style="font-size: 11px;margin-left: 10px;color: #333;">${moment(message.createdAt).fromNow()}</span></h6>
                             <p>${message.value}</p>
                         </div>
                     </div>
@@ -43,7 +43,7 @@ $(document).ready(function() {
                     </div>
                     <div class="row">
                         <div class="col-md-10">
-                            <h6 style="font-weight: bolder;">${message.sender}</h6>
+                            <h6 style="font-weight: bolder;">${message.sender} <span style="font-size: 11px;margin-left: 10px;color: #333;">${moment(message.createdAt).fromNow()}</span></h6>
                             <p>${message.value}</p>
                         </div>
                     </div>
@@ -59,7 +59,7 @@ $(document).ready(function() {
         var senderName = $("#sender-name").val();
         var userImage = $("#user-image").val();
         if(msg.trim().length > 0) {
-            socket.emit('private message',{ value: msg, sender: senderName, room: paramOne, userImage: userImage }, function() {
+            socket.emit('private message',{ value: msg, sender: senderName, room: paramOne, userImage: userImage, createdAt: moment() }, function() {
                 $("#msg").val("");
             });
             $.ajax({
@@ -85,7 +85,7 @@ $(document).ready(function() {
         var senderName = $("#sender-name").val();
         var userImage = $("#user-image").val();
         if(msg.trim().length > 0) {
-            socket.emit('private message',{ value: msg, sender: senderName, room: paramOne, userImage: userImage }, function() {
+            socket.emit('private message',{ value: msg, sender: senderName, room: paramOne, userImage: userImage, createdAt: moment() }, function() {
                 $("#msg").val("");
             });
             $.ajax({

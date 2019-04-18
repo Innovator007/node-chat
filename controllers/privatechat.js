@@ -1,6 +1,7 @@
 const User = require('../models/user');
 const Message = require("../models/message");
 const middleware = require("../middlewares/index");
+const moment = require("moment");
 
 module.exports = function(async) {
     return {
@@ -72,7 +73,7 @@ module.exports = function(async) {
                     const res3 = results[2];
                     var params = req.params.name.split('.');
                     const nameParams = params[0];
-                    res.render("privatechat/privatechat", { data: res1, chat: res2, messages: res3, name: nameParams });
+                    res.render("privatechat/privatechat", { moment: moment, data: res1, chat: res2, messages: res3, name: nameParams });
                 });
             });
 

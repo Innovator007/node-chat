@@ -59,7 +59,7 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-10">
-                                                    <h6 style="font-weight: bolder;"><%= message.sender.username %></h6>
+                                                    <h6 style="font-weight: bolder;"><%= message.sender.username %> <span style="font-size: 11px;margin-left: 10px;color: #333;"><%= moment(message.createdAt).fromNow() %></span></h6>
                                                     <p><%= message.body %></p>
                                                 </div>
                                             </div>
@@ -103,6 +103,7 @@
         </div>
     </div>
     <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
     <script src="../../javascript/group/groupchat.js"></script>
     <script src="../../javascript/group/sendRequest.js"></script>
     <script src="../../javascript/messagelink.js"></script>

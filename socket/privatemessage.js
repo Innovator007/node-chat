@@ -9,7 +9,8 @@ module.exports = function(io) {
             io.to(message.room).emit('new private message', {
                 value: message.value,
                 sender: message.sender,
-                userImage: message.userImage
+                userImage: message.userImage,
+                createdAt: message.createdAt
             });
 
             io.emit('message display', {});
