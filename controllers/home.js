@@ -3,14 +3,12 @@
 const Group = require('../models/groups');
 const User = require('../models/user');
 const Message = require('../models/message');
+const middleware = require("../middlewares/index");
 
 module.exports = function(_, async) {
     return {
         setRouting: function(router) {
-            router.get('/home', function(req,res) {
-                if(!req.user) {
-                    res.redirect("/");
-                }
+            router.get('/home', middleware.isLoggedin, function(req,res) {
                 async.parallel([
                     function(callback) {
                         if(req.query.filter) {
@@ -98,7 +96,7 @@ module.exports = function(_, async) {
                 });
             });
 
-            router.get("/members", function(req,res) {
+            router.get("/members", middleware.isLoggedin,function(req,res) {
                 if(req.query.member) {
                     const regex = new RegExp((req.query.member), 'gi');
                     User.find({ '$or': [{'username': regex},{'fullname': regex}] }, function(err, users) {
@@ -111,7 +109,7 @@ module.exports = function(_, async) {
                 }
             });
 
-            router.post("/home", function(req,res) {
+            router.post("/home", middleware.isLoggedin,function(req,res) {
                 async.parallel([
                     function(callback) {
                         Group.update({

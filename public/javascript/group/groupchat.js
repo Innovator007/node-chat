@@ -26,8 +26,17 @@ $(document).ready(function() {
         $(document).on("click", '.modalval', function() {
             $("#name").text('@' + $(this).text());
             $("#receiverName").val($(this).text());
+            if($(this).text() === sender) {
+                $("#add-friend").hide();
+            }
+            var friends = $(".friend").text();
+            var friend = friends.split("@");
+            if(friend.indexOf($(this).text()) > -1) {
+                $("#add-friend").attr("disabled",true);
+                $("#add-friend").text("Friends")
+            }
             $("#profileLink").attr("href", "/profile/" + $(this).text());
-        })
+        });
         $('#no-of-users').text(`(${data.length})`);
     });
 

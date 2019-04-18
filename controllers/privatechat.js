@@ -1,10 +1,11 @@
 const User = require('../models/user');
 const Message = require("../models/message");
+const middleware = require("../middlewares/index");
 
 module.exports = function(async) {
     return {
         setRouting: function(router) {
-            router.get('/chat/:name', function(req,res) {
+            router.get('/chat/:name', middleware.isLoggedin,function(req,res) {
                 async.parallel([
                     function(callback) {
                         User.findOne({
@@ -75,7 +76,7 @@ module.exports = function(async) {
                 });
             });
 
-            router.post("/chat/:name", function(req,res) {
+            router.post("/chat/:name", middleware.isLoggedin,function(req,res) {
                 var params = req.params.name.split('.');
                 const nameParams = params[0];
                 const nameRegex = new RegExp("^"+nameParams.toLowerCase(), "i");

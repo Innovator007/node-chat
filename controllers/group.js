@@ -1,11 +1,12 @@
 const User = require('../models/user');
 const Message = require('../models/message');
 const GroupMessage = require('../models/groupmessage');
+const middleware = require("../middlewares/index");
 
 module.exports = function(async) {
     return {
         setRouting: function(router) {
-            router.get("/group/:name", function(req,res) {
+            router.get("/group/:name", middleware.isLoggedin ,function(req,res) {
                 const name = req.params.name;
 
                 async.parallel([
@@ -75,7 +76,7 @@ module.exports = function(async) {
                 });
             });
 
-            router.post("/group/:name", function(req,res) {
+            router.post("/group/:name", middleware.isLoggedin, function(req,res) {
                 async.parallel([
                     function(callback) {
                         if(req.body.receiver) {
@@ -208,7 +209,7 @@ module.exports = function(async) {
                 
             });
 
-            router.post("/group/:name/message", function(req,res) {
+            router.post("/group/:name/message", middleware.isLoggedin ,function(req,res) {
                 if(req.body.message) {
                     var groupMessage = new GroupMessage();
                     groupMessage.sender = req.user._id;

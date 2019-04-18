@@ -2,11 +2,12 @@
 const path = require('path');
 const fs = require('fs');
 const Group = require('../models/groups');
+const middleware = require("../middlewares/index");
 
 module.exports = function(formidable) {
     return {
         setRouting: function(router) {
-            router.get("/admin/dashboard", function(req,res) {
+            router.get("/admin/dashboard",middleware.isLoggedin ,function(req,res) {
                 res.render("admin/dashboard");
             });
 
@@ -28,7 +29,7 @@ module.exports = function(formidable) {
                 form.parse(req);
             });
 
-            router.post("/dashboard", function(req,res) {
+            router.post("/dashboard",middleware.isLoggedin ,function(req,res) {
                 const newGroup = new Group();
                 newGroup.name = req.body.title;
                 newGroup.country = req.body.country;

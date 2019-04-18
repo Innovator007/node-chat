@@ -3,11 +3,12 @@ const User = require('../models/user');
 const Group = require("../models/groups");
 const path = require('path');
 const fs = require('fs');
+const middleware = require("../middlewares/index");
 
 module.exports = function(async, formidable) {
     return {
         setRouting: function(router) {
-            router.get("/profile", function(req,res) {
+            router.get("/profile", middleware.isLoggedin,function(req,res) {
                 async.parallel([
                     function(callback) {
                         if(req.user) {
@@ -71,7 +72,7 @@ module.exports = function(async, formidable) {
                 });
             }); 
 
-            router.post("/profile", function(req,res) {
+            router.post("/profile", middleware.isLoggedin,function(req,res) {
                 async.waterfall([
                     function(callback) {
                         User.findOne({"_id": req.user._id}, function(err, result) {
@@ -97,7 +98,7 @@ module.exports = function(async, formidable) {
                 ]);
             });
 
-            router.get("/profile/friends", function(req,res) {
+            router.get("/profile/friends", middleware.isLoggedin,function(req,res) {
                 async.parallel([
                     function(callback) {
                         if(req.user) {
@@ -161,7 +162,7 @@ module.exports = function(async, formidable) {
                 });
             });
 
-            router.get("/profile/:name", function(req,res) {
+            router.get("/profile/:name", middleware.isLoggedin,function(req,res) {
                 async.parallel([
                     function(callback) {
                         if(req.user) {
