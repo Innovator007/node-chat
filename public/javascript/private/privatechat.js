@@ -56,6 +56,9 @@ $(document).ready(function() {
                 body: message.value,
                 icon: '../../uploads/favicon.png',
                 timeout: 6000,
+                requireInteraction: false,
+                vibrate: [200, 100],
+                link: "/chat/" + paramOne,
                 onClick: function () {
                     window.focus();
                     this.close();
