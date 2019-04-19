@@ -71,6 +71,17 @@ $(document).ready(function() {
             `)
         }
         $('.messages').animate({scrollTop: $('.messages').prop("scrollHeight")}, 500);
+        if(message.sender !== sender) {
+            Push.create("New Message From " + message.sender, {
+                body: message.body,
+                icon: '../../uploads/favicon.png',
+                timeout: 6000,
+                onClick: function () {
+                    window.focus();
+                    this.close();
+                }
+            });
+        }
     });
 
     $("#send-msg").on("click", function(e) {
