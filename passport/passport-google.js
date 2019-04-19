@@ -29,7 +29,7 @@ passport.use(new GoogleStrategy({
         } else {
             const newUser = new User();
             newUser.google = profile.id;
-            newUser.username = profile.displayName;
+            newUser.username = profile.displayName.substr(0, profile.displayName.indexOf(" ")).toLowerCase();
             newUser.fullname = profile.displayName;
             newUser.userImage = profile._json.picture;
             newUser.save(function(err) {
