@@ -61,6 +61,7 @@ $(document).ready(function() {
         if(msg.trim().length > 0) {
             socket.emit('private message',{ value: msg, sender: senderName, room: paramOne, userImage: userImage, createdAt: moment() }, function() {
                 $("#msg").val("");
+                $('.emoji-wysiwyg-editor').html("");
             });
             $.ajax({
                 url: "/chat/" + paramOne,
@@ -70,6 +71,7 @@ $(document).ready(function() {
                 },
                 success: function(data) {
                     $("#msg").val("");
+                    $('.emoji-wysiwyg-editor').html("");
                 }
             })
         }
@@ -87,6 +89,7 @@ $(document).ready(function() {
         if(msg.trim().length > 0) {
             socket.emit('private message',{ value: msg, sender: senderName, room: paramOne, userImage: userImage, createdAt: moment() }, function() {
                 $("#msg").val("");
+                $('.emoji-wysiwyg-editor').html("");
             });
             $.ajax({
                 url: "/chat/" + paramOne,
@@ -96,6 +99,7 @@ $(document).ready(function() {
                 },
                 success: function(data) {
                     $("#msg").val("");
+                    $('.emoji-wysiwyg-editor').html("");
                 }
             })
         }

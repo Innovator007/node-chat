@@ -1,5 +1,5 @@
 <% include ../partials/header.ejs %>
-
+    <link rel="stylesheet" href="../../lib/css/emoji.css">
     <div class="container-fluid">
 
             <div class="modal fade" id="usersModal" tabindex="-1" role="dialog">
@@ -71,7 +71,7 @@
                         </div>
                         <hr>
                         <div class="send-message d-flex align-items-center">
-                            <input type="text" placeholder="Your Message" id="msg" name="message" class="form-control">
+                            <input type="text" data-emojiable="true" placeholder="Your Message" id="msg" name="message" class="form-control">
                             &nbsp;
                             <button id="send-msg" class="btn btn-info" style="border-radius: 50%;"><i class="fa fa-send"></i></button>
                         </div>
@@ -104,7 +104,26 @@
     </div>
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
+    <script src="../../lib/js/config.js"></script>
+    <script src="../../lib/js/util.js"></script>
+    <script src="../../lib/js/jquery.emojiarea.js"></script>
+    <script src="../../lib/js/emoji-picker.js"></script>
     <script src="../../javascript/group/groupchat.js"></script>
     <script src="../../javascript/group/sendRequest.js"></script>
     <script src="../../javascript/messagelink.js"></script>
+
+
+    <script>
+    
+    $(function() {
+        window.emojiPicker = new EmojiPicker({
+          emojiable_selector: '[data-emojiable=true]',
+          assetsPath: '../../lib/img/',
+          popupButtonClasses: 'fa fa-smile-o'
+        });
+        window.emojiPicker.discover();
+    });    
+
+    </script>
+
 <% include ../partials/footer.ejs %>

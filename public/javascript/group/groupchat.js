@@ -1,7 +1,6 @@
 
 $(document).ready(function() {
     var socket = io();
-
     var room = $("#room-name").text();
     var sender = $("#sender").text();
     $('.messages').animate({scrollTop: $('.messages').prop("scrollHeight")}, 2000);
@@ -89,7 +88,7 @@ $(document).ready(function() {
                 createdAt: moment()
             });
             $("#msg").val(""); 
-
+            $('.emoji-wysiwyg-editor').html("");
             $.ajax({
                 type: "POST",
                 url: "/group/" + room + "/message",
@@ -99,7 +98,7 @@ $(document).ready(function() {
                 },
                 success: function() {
                     $("#msg").val("");
-                    console.log("Group Message Sent successfully");
+                    $('.emoji-wysiwyg-editor').html("");
                 }
             })
         }
@@ -123,7 +122,7 @@ $(document).ready(function() {
                     createdAt: moment()
                 });
                 $("#msg").val(""); 
-    
+                $('.emoji-wysiwyg-editor').html("");
                 $.ajax({
                     type: "POST",
                     url: "/group/" + room + "/message",
@@ -133,7 +132,7 @@ $(document).ready(function() {
                     },
                     success: function() {
                         $("#msg").val("");
-                        console.log("Group Message Sent successfully");
+                        $('.emoji-wysiwyg-editor').html("");
                     }
                 })
             }
