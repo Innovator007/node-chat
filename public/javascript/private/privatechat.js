@@ -53,7 +53,7 @@ $(document).ready(function() {
         $('.messages').animate({scrollTop: $('.messages').prop("scrollHeight")}, 500);
         if(message.sender !== $("#user-name").val()) {
             Push.create("New Message From " + message.sender, {
-                body: message.body,
+                body: message.value,
                 icon: '../../uploads/favicon.png',
                 timeout: 6000,
                 onClick: function () {
