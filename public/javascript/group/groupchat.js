@@ -98,7 +98,7 @@ $(document).ready(function() {
         }
         $('.messages').animate({scrollTop: $('.messages').prop("scrollHeight")}, 500);
         if(message.sender !== sender) {
-            Push.create("New Message From " + message.sender, {
+            Push.create("New Message From " + message.sender + " in " + room, {
                 body: message.value,
                 icon: '../../uploads/favicon.png',
                 timeout: 6000,
