@@ -1,6 +1,7 @@
 
 $(document).ready(function() {
     var socket = io();
+    var timeout;
     var room = $("#room-name").text();
     var sender = $("#sender").text();
     $('.messages').animate({scrollTop: $('.messages').prop("scrollHeight")}, 2000);
@@ -38,6 +39,31 @@ $(document).ready(function() {
             $("#profileLink").attr("href", "/profile/" + $(this).text());
         });
         $('#no-of-users').text(`(${data.length})`);
+    });
+
+    function timeoutFunction() {
+        socket.emit("typing", { username: sender, room: room, isTyping: false });
+    }
+
+    $("#msg").on("keydown", function() {
+        console.log("keydown event");
+        socket.emit("typing", {
+            username: sender,
+            isTyping: true,
+            room: room
+        });
+        clearTimeout(timeout);
+        timeout = setTimeout(timeoutFunction,2000);
+    });
+
+    socket.on("typing", function(data) {
+        if(data.isTyping) {
+            if(data.username !== sender) {
+                $("#typing").html("(" + data.username + " is typing...)");
+            }
+        } else {
+            $("#typing").html("");
+        }
     });
 
     socket.on("newMessage", function(message) {

@@ -5,6 +5,10 @@ module.exports = function(io) {
             socket.join(param.room2);
         });
 
+        socket.on("typing", function(data) {
+            io.to(data.room).emit("typing", data);
+        });
+
         socket.on('private message', function(message, callback) {
             io.to(message.room).emit('new private message', {
                 value: message.value,

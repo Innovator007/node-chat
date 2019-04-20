@@ -23,7 +23,11 @@
             <div class="col-md-6">
                 <div class="card border-info">
                     <div class="card-body">
-                        <h5 id="receiver-name" class="card-title"></h5>
+                        <div class="d-flex">
+                            <h5 id="receiver-name" class="card-title mr-2"></h5>  
+                            <span style="font-size: 14px;margin-top: 3px;" id="typing"></span>  
+                        </div>
+                        
                         <hr>
                         <div class="messages">
                             <ul id="messages__list" class="list-unstyled">
@@ -91,6 +95,15 @@
             </div>
         </div>
     </div>
+
+    <script>
+    
+        function keyDownEvent() {
+            $("#msg").keydown();
+        }
+    
+    
+    </script>
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>

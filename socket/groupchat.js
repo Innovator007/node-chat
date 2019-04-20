@@ -14,6 +14,10 @@ module.exports = function(io, Users) {
             io.to(message.room).emit("newMessage", message);
         });
 
+        socket.on("typing", function(data) {
+            io.to(data.room).emit("typing", data);
+        });
+
         socket.on('disconnect', function() {
             var user = users.removeUser(socket.id);
             if(user) {

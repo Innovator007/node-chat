@@ -352,6 +352,7 @@
       'data-id': id,
       'data-type': 'input',
       'placeholder': $textarea.attr('placeholder'),
+      'onkeydown': 'return keyDownEvent()',
       'contenteditable': 'true',
     });
 
@@ -376,7 +377,7 @@
     });
 
     var editorDiv = this.$editor;
-    this.$editor.on("change keydown keyup resize scroll", function(e) {
+    this.$editor.on("change keydown keyup resize scroll", function(e) {      
       if(MAX_LENGTH_ALLOWED_KEYS.indexOf(e.which) == -1 &&
         !((e.ctrlKey || e.metaKey) && e.which == 65) && // Ctrl + A
         !((e.ctrlKey || e.metaKey) && e.which == 67) && // Ctrl + C

@@ -1,5 +1,6 @@
 $(document).ready(function() {
     var socket = io();
+    var timeout;
     $('.messages').animate({scrollTop: $('.messages').prop("scrollHeight")}, 2000);
     var paramOne = deparam(window.location.pathname);
     var newParams = paramOne.split(".");
@@ -18,6 +19,31 @@ $(document).ready(function() {
         socket.on('message display', function() {
             $("#message-reload").load(location.href + ' #message-reload');
         }); 
+    });
+
+    function timeoutFunction() {
+        socket.emit("typing", { username: $("#user-name").val(), room: paramOne, isTyping: false });
+    }
+
+    $("#msg").on("keydown", function() {
+        console.log("keydown event");
+        socket.emit("typing", {
+            username: $("#user-name").val(),
+            isTyping: true,
+            room: paramOne
+        });
+        clearTimeout(timeout);
+        timeout = setTimeout(timeoutFunction,2000);
+    });
+
+    socket.on("typing", function(data) {
+        if(data.isTyping) {
+            if(data.username !== $("#user-name").val()) {
+                $("#typing").html("typing...");
+            }
+        } else {
+            $("#typing").html("");
+        }
     });
 
     socket.on("new private message", function(message) {
