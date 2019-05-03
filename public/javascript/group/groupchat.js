@@ -2,7 +2,7 @@
 $(document).ready(function() {
     var socket = io();
     var timeout;
-    var room = $("#room-name").text();
+    var room = $("#room-name").val();
     var sender = $("#sender").text();
     $('.messages').animate({scrollTop: $('.messages').prop("scrollHeight")}, 2000);
     socket.on("connect", function() {

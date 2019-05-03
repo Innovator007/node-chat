@@ -41,7 +41,8 @@
             <div class="col-md-6">
                 <div class="card border-info">
                     <div class="card-body">
-                        <h5 id="room-name" class="card-title"><%= name.replace(/-/g, " ") %> <span style="font-size: 14px;" id="typing"></span></h5>
+                        <input type="hidden" name="room-name" id="room-name" value="<%= name.replace(/-/g, '') %>">
+                        <h5 class="card-title"><%= name.replace(/-/g, " ") %> <span style="font-size: 14px;" id="typing"></span></h5>
                         <hr>
                         <div class="messages">
                             <ul id="messages__list" class="list-unstyled">
