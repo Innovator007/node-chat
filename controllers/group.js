@@ -63,7 +63,7 @@ module.exports = function(async) {
                         });
                     },
                     function(callback) {
-                        GroupMessage.find({ 'name': req.params.name })
+                        GroupMessage.find({ 'name': req.params.name.replace(/-/g, " ") })
                             .populate('sender')
                             .exec(function(err, groupMessages) {
                                 callback(err, groupMessages);
