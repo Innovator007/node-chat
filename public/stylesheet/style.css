@@ -13,6 +13,11 @@ body {
     margin-bottom: 15px;
 }
 
+img.card-img-top {
+    height: 15rem;
+    object-fit: cover;
+}
+
 a {
     color: rgb(39, 38, 38) !important;
     text-decoration: none;
